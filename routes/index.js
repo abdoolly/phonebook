@@ -4,6 +4,9 @@ const { throwOnValidationError, putIfExist } = require('../services/Helpers');
 const { CreateContactValidator, UpdateContactValidator, validatePageQueryString, validationParamContact } = require('../services/Validators');
 const router = express.Router();
 
+/**
+ * api to create a contact
+ */
 router.post('/contact', CreateContactValidator(), async (req, res) => {
     throwOnValidationError(req);
     const { name, phoneNumbers, email, mailingAddress } = req.body;
@@ -16,8 +19,9 @@ router.post('/contact', CreateContactValidator(), async (req, res) => {
     return res.status(201).send(contact);
 });
 
-
-
+/**
+ * api to update contact any field in it
+ */
 router.patch('/contact/:contactId', UpdateContactValidator(), async (req, res) => {
     throwOnValidationError(req);
     const { contactId } = req.params;
@@ -39,6 +43,9 @@ router.patch('/contact/:contactId', UpdateContactValidator(), async (req, res) =
     return res.send(contact);
 });
 
+/**
+ * api to get single contact
+ */
 router.get('/contact/:contactId', validationParamContact(), async (req, res) => {
     throwOnValidationError(req);
     const { contactId } = req.params;
@@ -49,6 +56,9 @@ router.get('/contact/:contactId', validationParamContact(), async (req, res) => 
     return res.send(contact);
 });
 
+/**
+ * api to get many contacts give page, and perPage query strings
+ */
 router.get('/contacts', validatePageQueryString(), async (req, res) => {
     const page = req.query.page || 1;
     const perPage = req.query.perPage || 10;
@@ -64,6 +74,9 @@ router.get('/contacts', validatePageQueryString(), async (req, res) => {
     });
 });
 
+/**
+ * api to delete a contact give the contact id
+ */
 router.delete('/contact/:contactId', validationParamContact(), async (req, res) => {
     throwOnValidationError(req);
     const { contactId } = req.params;
