@@ -20,6 +20,10 @@ app.use('/', TokenAuth, indexRouter);
 seedToken();
 
 app.use((err, req, res, next) => {
+  if (err.name === 'ValidationErrors') {
+    return res.status(422).send({ errors: err.validationErrors });
+  }
+
   res.status(500);
   console.error(err);
   return res.json({ error: err.message });
