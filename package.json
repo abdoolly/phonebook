@@ -34,7 +34,7 @@
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "config",
-      "database",
+      "models",
       "tests"
     ]
   }
