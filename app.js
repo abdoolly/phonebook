@@ -5,9 +5,8 @@ const helmet = require('helmet');
 const cors = require('cors');
 require('./config/database');
 const indexRouter = require('./routes/index');
-const Token = require('./models/Token');
 const { seedToken } = require('./services/Bootstrap');
-const TokenAuth = require('./middlewares/tokenAuth');
+const TokenAuth = require('./middlewares/TokenAuth');
 
 const app = express();
 app.use(helmet());
