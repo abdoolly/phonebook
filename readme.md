@@ -8,6 +8,20 @@ This is a small system that allows a user to create, update, delete , and list p
 - docker-compose
 - node.js
 
+## configure
+
+take a copy from .env.example and rename .env
+example .env
+
+```
+MONGO_HOST=127.0.0.1
+MONGO_PORT=27017
+MONGO_DB_NAME=phoneBookDB
+MONGO_INITDB_ROOT_USERNAME=phoneBookUser
+MONGO_INITDB_ROOT_PASSWORD=supersecretpassword
+NODE_ENV=development
+```
+
 ## Installation
 
 for ease you can use docker to run get up and running with everything
