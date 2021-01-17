@@ -12,6 +12,9 @@ const throwOnValidationError = (req) => {
     }
 };
 
+const putIfExist = (key, value) => value ? { [key]: value } : {};
+
 module.exports = {
-    throwOnValidationError
+    throwOnValidationError,
+    putIfExist
 };
