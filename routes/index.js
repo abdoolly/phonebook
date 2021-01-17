@@ -1,7 +1,7 @@
 const express = require('express');
 const Contact = require('../models/Contact');
 const { throwOnValidationError, putIfExist } = require('../services/Helpers');
-const { CreateContactValidator, UpdateContactValidator, validationParamContact } = require('../services/Validators');
+const { CreateContactValidator, UpdateContactValidator, validatePageQueryString, validationParamContact } = require('../services/Validators');
 const router = express.Router();
 
 router.post('/contact', CreateContactValidator(), async (req, res) => {
@@ -49,8 +49,19 @@ router.get('/contact/:contactId', validationParamContact(), async (req, res) => 
     return res.send(contact);
 });
 
-router.get('/contacts', async (req, res) => {
-
+router.get('/contacts', validatePageQueryString(), async (req, res) => {
+    const page = req.query.page || 1;
+    const perPage = req.query.perPage || 10;
+    const { docs, totalPages, nextPage, prevPage } = await Contact.paginate({},
+        {
+            page, limit: perPage, sort: { name: 1 }
+        });
+    return res.send({
+        contacts: docs,
+        totalPages,
+        nextPage,
+        prevPage,
+    });
 });
 
 router.delete('/contact/:contactId', validationParamContact(), async (req, res) => {

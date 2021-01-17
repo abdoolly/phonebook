@@ -1,4 +1,4 @@
-const { checkSchema, param } = require("express-validator");
+const { checkSchema, param, query } = require("express-validator");
 const Contact = require("../models/Contact");
 
 const CreateContactValidator = () => {
@@ -111,8 +111,18 @@ const validationParamContact = () => {
     return param('contactId').isMongoId().withMessage('contactId param should be a mongoId');
 };
 
+const validatePageQueryString = () => {
+    return [
+        query('page')
+            .isInt()
+            .withMessage('Page query string should be an integer'),
+        query('perPage').isInt().withMessage('perPage should be integer')
+    ];
+};
+
 module.exports = {
     CreateContactValidator,
     UpdateContactValidator,
     validationParamContact,
+    validatePageQueryString,
 };
