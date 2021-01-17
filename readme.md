@@ -40,7 +40,150 @@ this will run the container and then run the tests and then it will exit.
 
 ## API documentation
 
-`will fill later after implementation`
+```
+POST /contact
+```
+this is the create api
+body should look like this 
+
+```
+{
+    "name": "Abdallah gamal1  ",
+    "phoneNumbers": {
+        "home":"01100894094"
+    },
+    "email": "abdoolly@gmail.com",
+    "mailingAddress": "This is my mailingAddress"
+}
+```
+
+response will be something like this
+
+```
+{
+    "_id": "60041e8764fb91a83b956620",
+    "name": "Abdallah gamal1",
+    "phoneNumbers": {
+        "home": "01100894094"
+    },
+    "email": "abdoolly@gmail.com",
+    "mailingAddress": "This is my mailingAddress",
+    "__v": 0
+}
+```
+
+------------------------------------
+
+```
+PATCH /contact/:contactId
+```
+
+This is the update api.
+
+**NOTE all field in update are optional so, you can send one field**
+```
+{
+    "name": "Abdallah gamal1",
+    "phoneNumbers": {
+        "home": "01100894094"
+    },
+    "email": "abdoolly@gmail.com",
+    "mailingAddress": "This is my mailingAddress"
+}
+```
+
+response is like 
+same object with the updated values
+```
+{
+    "_id": "60041e8764fb91a83b956620",
+    "name": "Abdallah gamal1",
+    "phoneNumbers": {
+        "home": "01100894094"
+    },
+    "email": "abdoolly@gmail.com",
+    "mailingAddress": "This is my mailingAddress",
+    "__v": 0
+}
+```
+
+-----------------------------------------
+
+```
+GET /contacts
+```
+
+Api to get many contacts
+
+page: is the page number
+perPage: is how many items in a single page
+
+```
+/contacts?page=1&perPage=10
+```
+
+response would be like
+
+it will give the pages information
+all data sorted by name
+```
+{
+    "contacts": [
+        {
+            "_id": "60041e7964fb91a83b95661e",
+            "name": "Abdallah gamal",
+            "phoneNumbers": {
+                "home": "01100894094"
+            },
+            "email": "abdoolly@gmail.com",
+            "mailingAddress": "This is my mailingAddress",
+            "__v": 0
+        },
+        {
+            "_id": "60041e8464fb91a83b95661f",
+            "name": "Abdallah gamal  123",
+            "phoneNumbers": {
+                "home": "01100894094"
+            },
+            "email": "abdoolly@gmail.com",
+            "mailingAddress": "This is my mailingAddress",
+            "__v": 0
+        },
+        {
+            "_id": "60041e8764fb91a83b956620",
+            "name": "Abdallah gamal1",
+            "phoneNumbers": {
+                "home": "01100894094"
+            },
+            "email": "abdoolly@gmail.com",
+            "mailingAddress": "This is my mailingAddress",
+            "__v": 0
+        }
+    ],
+    "totalPages": 2,
+    "nextPage": 2,
+    "prevPage": null
+}
+```
+
+----------------------------------------------
+
+```
+DELETE /contact/:contactId
+```
+this deletes a contact
+
+```
+/contact/6004160ecc162e9c9632f3d7
+```
+
+response
+
+```
+{
+    message: 'deleted successfully'
+}
+```
 
 ## Boilerplate description
 
@@ -70,4 +213,14 @@ I choose mongoose as the ODM as it’s very simple and popular .Also, if I am in
 
 ### Jest
 I have also used jest in testing as it’s one of the best tools also it have spies and mocks built in it.
+
+## Things I would have made if I have more time 
+
+- better documentation specially in the APIs part.
+- If the system will receive alot of requests I can make multiple instances and put a load balancer instance count will depend on a performance test and according to the expected number of incoming requests.
+- I would have used Oauth in authentication
+- I would have used redis to save the API tokens for faster retrieval
+- I definitely would have made much much more detailed tests as I have added tests for success scenarios only.
+
+
 
