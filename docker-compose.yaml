@@ -6,7 +6,8 @@ services:
     ports:
       - 3000:3000
     environment:
-      - NODE_ENV: production
+      NODE_ENV: production
+      MONGO_HOST: mongo
 
   mongo:
     image: mongo:4.2.1-bionic
